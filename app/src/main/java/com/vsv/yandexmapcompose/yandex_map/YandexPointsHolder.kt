@@ -16,12 +16,12 @@ class YandexPointsHolder(
         return ImageProvider.fromResource(context, this)
     }
 
-    fun putMarker(address: String, marker: PlacemarkMapObject) {
-        mapObjects[address] = marker
+    fun putMarker(id: String, marker: PlacemarkMapObject) {
+        mapObjects[id] = marker
     }
 
-    fun setSelectedMarker(address: String) {
-        selectedMarker = address
+    fun setSelectedMarker(id: String) {
+        selectedMarker = id
     }
 
     fun getSelectedMarker(): PlacemarkMapObject? = mapObjects[selectedMarker]
@@ -32,7 +32,7 @@ class YandexPointsHolder(
     }
 
     fun selectMarker(
-        address: String,
+        id: String,
         @DrawableRes selectedIcon: Int,
         @DrawableRes unselectedIcon: Int
     ) {
@@ -40,10 +40,10 @@ class YandexPointsHolder(
             setIcon(unselectedIcon.iconToImageProvider())
             zIndex = 0f
         }
-        mapObjects[address]?.apply {
+        mapObjects[id]?.apply {
             setIcon(selectedIcon.iconToImageProvider())
             zIndex = 2f
         }
-        selectedMarker = address
+        selectedMarker = id
     }
 }
