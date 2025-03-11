@@ -47,7 +47,7 @@ fun YandexMap(
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
-    val pointsHolder = remember { YandexPointsHolder(context) }
+    val pointsHolder = remember { YandexPointsHolder() }
     val mapView = remember { MapView(context) }
     val p by remember { mutableStateOf(mapView.mapWindow.map.mapObjects.addCollection()) }
     var currentZoom by remember { mutableFloatStateOf(10f) }
@@ -59,11 +59,6 @@ fun YandexMap(
     val mapObjectTapListener = object : MapObjectTapListener {
         override fun onMapObjectTap(p0: MapObject, p1: Point): Boolean {
             val data = (p0 as PlacemarkMapObject).userData as YandexPoint
-            pointsHolder.selectMarker(
-                data.id,
-                data.selectedIcon,
-                data.unselectedIcon
-            )
             onPointClick(data)
             return true
         }
